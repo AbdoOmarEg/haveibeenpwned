@@ -72,6 +72,7 @@ pub async fn show_form() -> impl IntoResponse {
     form
 }
 
+#[allow(dead_code)]
 enum AcceptFormResponse {
     Pawned(AcceptFormPawned),
     Secure(AcceptFormSecure),
@@ -123,7 +124,7 @@ struct CheckResult {
 
 impl IntoResponse for CheckResult {
     fn into_response(self) -> Response {
-        Json::into_response(axum::Json(self))
+        Json::into_response(Json(self))
     }
 }
 
