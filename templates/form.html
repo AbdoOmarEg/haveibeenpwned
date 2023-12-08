@@ -1,16 +1,37 @@
-<!doctype html>
-<html>
+<!-- <!doctype html> -->
+<!-- <html> -->
+<!---->
+<!-- <head></head> -->
+<!---->
+<!-- <body> -->
+<!--   <form action="/" method="post"> -->
+<!--     <label> -->
+<!--       enter your email -->
+<!--       <input type="text" name="query"> -->
+<!--     </label> -->
+<!--     <input type="submit" value="submit!"> -->
+<!--   </form> -->
+<!-- </body> -->
+<!---->
+<!-- </html> -->
 
-<head></head>
 
-<body>
-  <form action="/" method="post">
-    <label>
-      enter your email
-      <input type="text" name="query">
-    </label>
-    <input type="submit" value="submit!">
-  </form>
-</body>
+{% extends "base.html" %}
 
-</html>
+{% block title %} Home {% call super() %} {% endblock %}
+
+{% block head %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+{% call super() %}
+<form action="/" method="post">
+  <label>
+    enter your email
+    <input type="text" name="query">
+  </label>
+  <input type="submit" value="submit!">
+</form>
+{% endblock %}

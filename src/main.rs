@@ -5,8 +5,14 @@ mod migrate;
 mod web;
 
 use migrate::initialize_database;
+use sqlx::SqlitePool;
 use tokio::net::TcpListener;
 use web::{accept_form, handler_404, show_form};
+
+// #[derive(Clone)]
+// struct AppState {
+//     pool: SqlitePool,
+// }
 
 #[tokio::main]
 async fn main() {
