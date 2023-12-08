@@ -16,6 +16,23 @@ pub struct Input {
 #[template(path = "form.html")]
 pub struct MainFormTemplate;
 
+// struct HtmlTemplate<T>(T);
+//
+// impl<T> IntoResponse for HtmlTemplate<T>
+// where
+//     T: Template,
+// {
+//     fn into_response(self) -> Response {
+//         match self.0.render() {
+//             Ok(html) => Html(html).into_response(),
+//             Err(err) => (
+//                 StatusCode::INTERNAL_SERVER_ERROR,
+//                 format!("Failed to render template. Error: {err}"),
+//             )
+//                 .into_response(),
+//         }
+//     }
+// }
 impl IntoResponse for MainFormTemplate {
     fn into_response(self) -> Response {
         match self.render() {
@@ -141,23 +158,22 @@ pub async fn accept_form(
     .await
     .unwrap();
 
-    let response = match found {
+    match found {
         Some(email) => {
-            println!("found email");
+            println!("{} found", email.email);
             Json(CheckResult {
                 email: email.email.to_string(),
                 found: true,
             })
         }
         None => {
-            println!("email not found");
+            println!("{} not found", input.query);
             Json(CheckResult {
                 email: input.query.to_string(),
                 found: false,
             })
         }
-    };
-    response
+    }
 }
 
 pub async fn handler_404() -> impl IntoResponse {
